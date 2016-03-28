@@ -1,0 +1,884 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="工具," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
+
+
+<meta name="description" content="Xcode 的武装插件
+最好用的代码补齐插件，没有之一FuzzyAutocompletePlugin是一个Xcode 5兼容的插件，通过添加模糊匹配来提高Xcode代码自动补全功能，开发者无需遵循从头匹配的原则，只要记得方法里某个关键字即可进行匹配，很好地提高了工作效率。注意：该插件只在Xcode 5上进行过测试，没有测试和其他插件之间的兼容性（KSImageNamed除外）。项目地址：https">
+<meta property="og:type" content="article">
+<meta property="og:title" content="效率就是生命，提高效率方法">
+<meta property="og:url" content="http://yoursite.com/2015/07/25/效率就是生命，提高效率方法/index.html">
+<meta property="og:site_name" content="DavidCap">
+<meta property="og:description" content="Xcode 的武装插件
+最好用的代码补齐插件，没有之一FuzzyAutocompletePlugin是一个Xcode 5兼容的插件，通过添加模糊匹配来提高Xcode代码自动补全功能，开发者无需遵循从头匹配的原则，只要记得方法里某个关键字即可进行匹配，很好地提高了工作效率。注意：该插件只在Xcode 5上进行过测试，没有测试和其他插件之间的兼容性（KSImageNamed除外）。项目地址：https">
+<meta property="og:image" content="http://yoursite.com/images/效率就是生命，提高效率方法/1.png">
+<meta property="og:image" content="http://yoursite.com/images/效率就是生命，提高效率方法/2.png">
+<meta property="og:image" content="http://yoursite.com/images/效率就是生命，提高效率方法/3.png">
+<meta property="og:image" content="http://yoursite.com/images/效率就是生命，提高效率方法/4.png">
+<meta property="og:image" content="http://yoursite.com/images/效率就是生命，提高效率方法/5.png">
+<meta property="og:image" content="http://yoursite.com/images/效率就是生命，提高效率方法/6.png">
+<meta property="og:image" content="http://yoursite.com/images/效率就是生命，提高效率方法/7.png">
+<meta property="og:image" content="http://yoursite.com/images/效率就是生命，提高效率方法/8.png">
+<meta property="og:image" content="http://yoursite.com/images/效率就是生命，提高效率方法/9.png">
+<meta property="og:image" content="http://yoursite.com/images/效率就是生命，提高效率方法/10.png">
+<meta property="og:image" content="http://yoursite.com/images/效率就是生命，提高效率方法/11.png">
+<meta property="og:image" content="http://yoursite.com/images/效率就是生命，提高效率方法/12.png">
+<meta property="og:image" content="http://yoursite.com/images/效率就是生命，提高效率方法/13.png">
+<meta property="og:updated_time" content="2016-03-28T14:06:10.455Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="效率就是生命，提高效率方法">
+<meta name="twitter:description" content="Xcode 的武装插件
+最好用的代码补齐插件，没有之一FuzzyAutocompletePlugin是一个Xcode 5兼容的插件，通过添加模糊匹配来提高Xcode代码自动补全功能，开发者无需遵循从头匹配的原则，只要记得方法里某个关键字即可进行匹配，很好地提高了工作效率。注意：该插件只在Xcode 5上进行过测试，没有测试和其他插件之间的兼容性（KSImageNamed除外）。项目地址：https">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> 效率就是生命，提高效率方法 | DavidCap </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">DavidCap</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">生活不止眼前的苟且</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="#" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                效率就是生命，提高效率方法
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-07-25T21:39:08+08:00" content="2015-07-25">
+              2015-07-25
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Xcode__u7684_u6B66_u88C5"><a href="#Xcode__u7684_u6B66_u88C5" class="headerlink" title="Xcode 的武装"></a>Xcode 的武装</h1><h2 id="u63D2_u4EF6"><a href="#u63D2_u4EF6" class="headerlink" title="插件"></a>插件</h2><ol>
+<li>最好用的代码补齐插件，没有之一<br><br>FuzzyAutocompletePlugin是一个Xcode 5兼容的插件，通过添加模糊匹配来提高Xcode代码自动补全功能，开发者无需遵循从头匹配的原则，只要记得方法里某个关键字即可进行匹配，很好地提高了工作效率。<br>注意：该插件只在Xcode 5上进行过测试，没有测试和其他插件之间的兼容性（KSImageNamed除外）。<br>项目地址：<a href="https://github.com/chendo/FuzzyAutocompletePlugin" target="_blank" rel="external">https://github.com/chendo/FuzzyAutocompletePlugin</a></li>
+</ol>
+<a id="more"></a>
+<ol>
+<li><p>最好用的图片名字补齐插件，没有之一<br><br>为项目中使用的UIImage的imageNamed提供文件名自动补全功能。使用[UIImage imageNamed:@”xxx”]时，该插件会扫描整个workspace中的图片文件。<br>项目地址： <a href="https://github.com/ksuther/KSImageNamed-Xcode" target="_blank" rel="external">https://github.com/ksuther/KSImageNamed-Xcode</a></p>
+</li>
+<li><p>最好用的代码注释插件<br>VVDocumenter,很多时候，为了快速开发，很多的技术文档都是能省则省，这个时候注释就变得异常重要，再配合Doxygen这种注释自动生成文档的，就完美了。但是每次都要手动输入规范化的注释，着实也麻烦，但有了VVDocumenter，规范化的注释，主需要输入三个斜线“///”，就OK啦！（VVDocumenter在Mac OSX 10.8.5和Xcode 4.6.3上进行开发，应该能支持所有Xcode 4版本，如果想支持Xcode 5，可以对plist文件稍作修改。<br>项目地址：<a href="https://github.com/onevcat/VVDocumenter-Xcode" target="_blank" rel="external">https://github.com/onevcat/VVDocumenter-Xcode</a></p>
+</li>
+<li><p>最好用的代码对齐。<br>XAlign，一个用来对齐常规代码的Xcode插件，十分强大的自定义对齐模式。这里是一个对齐模式示例，模式文件在main/main/patterns.plist.<br>详细信息可参看：<a href="https://github.com/qfish/XAlign" target="_blank" rel="external">https://github.com/qfish/XAlign</a></p>
+</li>
+</ol>
+<h1 id="u90A3_u4E9B_u597D_u7528_u7684_u8F6F_u4EF6"><a href="#u90A3_u4E9B_u597D_u7528_u7684_u8F6F_u4EF6" class="headerlink" title="那些好用的软件"></a>那些好用的软件</h1><ol>
+<li><p>标注px工具<br>当UI给你一大堆设计稿的时候，而你又不确定各个控件之间间距的时候，这款软件可以很大的帮助你。 —– 马克鳗图标。<br>可以方便的标注图标之间的像素位，颜色的RGB等。百度一下可以找到的。</p>
+</li>
+<li><p>图片生成工具<br>当你有一个@2x的时候，这个软件就能很方便的帮你生成其他size的图片。<br>参考地址：<a href="http://www.cocoachina.com/bbs/read.php?tid-290247-keyword-icon.html" target="_blank" rel="external">http://www.cocoachina.com/bbs/read.php?tid-290247-keyword-icon.html</a><br>或者：<a href="https://itunes.apple.com/tw/app/prepo/id476533227?mt=12" target="_blank" rel="external">https://itunes.apple.com/tw/app/prepo/id476533227?mt=12</a></p>
+</li>
+<li><p>JSON<br>当你测试API的时候，得到一串JSON的数据，太难看了，没有补齐，这还让不让人活啦。这个时候你就需要chrome的一个优秀的插件了。JSONView。这样就可以在浏览器上方便的查看JSON了。<br>参考链接：<a href="http://www.chromein.com/crx_11247.html" target="_blank" rel="external">http://www.chromein.com/crx_11247.html</a></p>
+</li>
+</ol>
+<h1 id="Xcode_u5FEB_u6377_u952E"><a href="#Xcode_u5FEB_u6377_u952E" class="headerlink" title="Xcode快捷键"></a>Xcode快捷键</h1><h4 id="1-_u5DE5_u7A0B_u5BFC_u822A_u5668_3ACommand+1"><a href="#1-_u5DE5_u7A0B_u5BFC_u822A_u5668_3ACommand+1" class="headerlink" title="1.工程导航器:Command+1"></a>1.工程导航器:Command+1</h4><p>快速浏览代码、图片以及用户界面文件。<br><img src="/images/效率就是生命，提高效率方法/1.png" alt="1419413830714452.png"></p>
+<h4 id="2-_u663E_u793A/_u9690_u85CF_u5BFC_u822A_u5668_u9762_u677F_3ACommand+0"><a href="#2-_u663E_u793A/_u9690_u85CF_u5BFC_u822A_u5668_u9762_u677F_3ACommand+0" class="headerlink" title="2.显示/隐藏导航器面板:Command+0"></a>2.显示/隐藏导航器面板:Command+0</h4><p>当你在对屏幕进行截图的时候可能会想要隐藏起与你感兴趣内容的无关的部分。假如你想要使用辅助编辑器或者想要设计用户界面并将其连接到代码的时候，这个快捷键会相当有用。<br><img src="/images/效率就是生命，提高效率方法/2.png" alt="1419413840169392.png"></p>
+<h4 id="3-_u663E_u793A/_u9690_u85CF_u5B9E_u7528_u5DE5_u5177_u9762_u677F_3ACommand+Option+0"><a href="#3-_u663E_u793A/_u9690_u85CF_u5B9E_u7528_u5DE5_u5177_u9762_u677F_3ACommand+Option+0" class="headerlink" title="3.显示/隐藏实用工具面板:Command+Option+0"></a>3.显示/隐藏实用工具面板:Command+Option+0</h4><p>实用工具面板主要用于编辑用户界面文件时，在你只考虑写代码的时候，就可以隐藏它。<br><img src="/images/效率就是生命，提高效率方法/3.png" alt="1419413850557026.png"></p>
+<h4 id="4-_u5728_u8F85_u52A9_u7F16_u8F91_u5668_u4E2D_u6253_u5F00_u6587_u4EF6_3A_u5728_u9879_u76EE_u5BFC_u822A_u5668_u4E2D_u9009_u4E2D_u6587_u4EF6_u6267_u884COption+_u5DE6_u952E_u70B9_u51FB_u64CD_u4F5C_u3002"><a href="#4-_u5728_u8F85_u52A9_u7F16_u8F91_u5668_u4E2D_u6253_u5F00_u6587_u4EF6_3A_u5728_u9879_u76EE_u5BFC_u822A_u5668_u4E2D_u9009_u4E2D_u6587_u4EF6_u6267_u884COption+_u5DE6_u952E_u70B9_u51FB_u64CD_u4F5C_u3002" class="headerlink" title="4.在辅助编辑器中打开文件:在项目导航器中选中文件执行Option+左键点击操作。"></a>4.在辅助编辑器中打开文件:在项目导航器中选中文件执行Option+左键点击操作。</h4><p>一个快速打开Assistant Editor的方式–只需要按住Option键并点击你想要在当前编辑框右边打开的文件即可。<br><img src="/images/效率就是生命，提高效率方法/4.png" alt="1419413874412106.png"></p>
+<h2 id="Xcode_u641C_u7D22_u5FEB_u6377_u952E"><a href="#Xcode_u641C_u7D22_u5FEB_u6377_u952E" class="headerlink" title="Xcode搜索快捷键"></a>Xcode搜索快捷键</h2><p>当你在敲代码的时候，突然想加个什么功能，或者想修改个什么Bug，当然最快的方法就是用查找啦。无需用滚轮穿越百行代码，只需要使用查找，就可以直接跳到特定的代码段。</p>
+<h4 id="5-_u641C_u7D22_u5BFC_u822A_u5668_28Find_Navigator_uFF0C_u4E5F_u5C31_u662F_u641C_u7D22_29_3ACommand+Shift+F"><a href="#5-_u641C_u7D22_u5BFC_u822A_u5668_28Find_Navigator_uFF0C_u4E5F_u5C31_u662F_u641C_u7D22_29_3ACommand+Shift+F" class="headerlink" title="5.搜索导航器(Find Navigator，也就是搜索):Command+Shift+F"></a>5.搜索导航器(Find Navigator，也就是搜索):Command+Shift+F</h4><p>使用项目搜索可以找到某个变量或方法名的被提到的次数。可以依据实例来匹配，并可忽略大小写字母。另外还可以对查找的变量名进行替换。<br><img src="/images/效率就是生命，提高效率方法/5.png" alt="1419413934202572.png"></p>
+<h4 id="6-_u6587_u4EF6_u8DF3_u8F6C_u680F_3AControl+6_uFF08_u952E_u5165_u65B9_u6CD5/_u53D8_u91CF_u540D+Enter_u8DF3_u8F6C_uFF09"><a href="#6-_u6587_u4EF6_u8DF3_u8F6C_u680F_3AControl+6_uFF08_u952E_u5165_u65B9_u6CD5/_u53D8_u91CF_u540D+Enter_u8DF3_u8F6C_uFF09" class="headerlink" title="6.文件跳转栏:Control+6（键入方法/变量名+Enter跳转）"></a>6.文件跳转栏:Control+6（键入方法/变量名+Enter跳转）</h4><p>跳转至当前代码文件中的代码行。如果文件中有上千行代码，你可以通过该快捷操作来缩小查找范围，从而在需要的地方插入代码以添加新的功能。<br><img src="/images/效率就是生命，提高效率方法/6.png" alt="1419413945333622.png"></p>
+<h4 id="7-_u5FEB_u901F_u6253_u5F00_3A_Command_+_Shift_+_O"><a href="#7-_u5FEB_u901F_u6253_u5F00_3A_Command_+_Shift_+_O" class="headerlink" title="7.快速打开: Command + Shift + O"></a>7.快速打开: Command + Shift + O</h4><p>喜欢使用键盘但不喜欢使用鼠标的人会大爱这个快捷方式，可以直接跳转到某个方法定义或者指定的代码文件。<br><img src="/images/效率就是生命，提高效率方法/7.png" alt="1419413982800551.png"></p>
+<h4 id="8-_u8DF3_u8F6C_u680F_u548C_u5FEB_u901F_u6253_u5F00_u641C_u7D22_u8F93_u5165_u5FEB_u6377_u952E"><a href="#8-_u8DF3_u8F6C_u680F_u548C_u5FEB_u901F_u6253_u5F00_u641C_u7D22_u8F93_u5165_u5FEB_u6377_u952E" class="headerlink" title="8.跳转栏和快速打开搜索输入快捷键"></a>8.跳转栏和快速打开搜索输入快捷键</h4><p>键入第一个字母即可快速切换至某个文件或者找到特定的代码行。比如，在ViewController.Swift文件中，按下Command + Shift + O，然后键入vDL，最先展示的结果是带有<br>viewDidLoad()名的函数。<br>键入首字母，以较少输入搜索更多。<br><img src="/images/效率就是生命，提高效率方法/8.png" alt="1419413999447964.png"></p>
+<h4 id="9-__u7A0B_u5E8F_u4E2D_28Objective-C_u6216C++_u7F16_u5199_29-h_and_-m_u6587_u4EF6_u95F4_u7684_u5FEB_u901F_u5207_u6362_3A_Control_+_Command_+_Up_Arrow"><a href="#9-__u7A0B_u5E8F_u4E2D_28Objective-C_u6216C++_u7F16_u5199_29-h_and_-m_u6587_u4EF6_u95F4_u7684_u5FEB_u901F_u5207_u6362_3A_Control_+_Command_+_Up_Arrow" class="headerlink" title="9. 程序中(Objective-C或C++编写).h and .m文件间的快速切换: Control + Command + Up Arrow"></a>9. 程序中(Objective-C或C++编写).h and .m文件间的快速切换: Control + Command + Up Arrow</h4><p>如果你用Objective-C和C++编写程序，或者使用其他语言编写的开源代码，那你可能需要查找现有的代码。你可以使用“Control + Command + Up Arrow”组合键操作在两个<br>相关的文件间快速切换，比如Objective-C中的头文件和实现文件。假如你使用Swift编写代码，这就有点不合适了，因为Swift使用单一代码文件。<br><strong>应用程序编译和清理</strong><br>在体验新应用之前你必须先运行它，不过有时候Xcode会不大给力，不能很好地运行你的项目，这时候你就需要清除不能运行的项目。<br>以下快捷键可帮你在代码编写过程中尽可能少地使用鼠标。</p>
+<h4 id="10-_u8FD0_u884Capp_3A_Command_+_R"><a href="#10-_u8FD0_u884Capp_3A_Command_+_R" class="headerlink" title="10.运行app: Command + R"></a>10.运行app: Command + R</h4><p>在编写代码的过程中，我通常会使用该快捷键来自由运行应用程序。尽可能地测试应用程序，这样你可以在早期找到并修复应用中的bug。<br><img src="/images/效率就是生命，提高效率方法/9.png" alt="1419414205765953.png"></p>
+<h4 id="11-_u6E05_u9664_u5DE5_u7A0B_3A_Command_+_Shift_+_K"><a href="#11-_u6E05_u9664_u5DE5_u7A0B_3A_Command_+_Shift_+_K" class="headerlink" title="11.清除工程: Command + Shift + K"></a>11.清除工程: Command + Shift + K</h4><p>或许有那么一次Xcode运行出现问题，或者应用无法响应，或者出现了意料之外的情况，你首先会想要清除工程并再次运行它。如果这样都还不能解决问题，好吧，关掉Xcode<br>，重新打开。倘若应用程序无法运行，先看看有没有错误信息提示，你可以发挥作为“Googler”的优势来获得帮助。不过这种做法不易太过频繁，它会降低程序的开发速度。它将移除所有的中间文件，而再造这些文件还要花费时间。<br>当运行失败时清除Xcode工程<br><img src="/images/效率就是生命，提高效率方法/10.png" alt="1419414231730618.png"></p>
+<h4 id="12-_u6784_u5EFA_u5E94_u7528_u7A0B_u5E8F_3A_Command_+_B"><a href="#12-_u6784_u5EFA_u5E94_u7528_u7A0B_u5E8F_3A_Command_+_B" class="headerlink" title="12.构建应用程序: Command + B"></a>12.构建应用程序: Command + B</h4><p>检查所写代码以确保其正常工作是你经常要做的事情，编译app工程可让你在编写下一个特性之前确定其是否正常工作。即便Xcode在代码编写后会很快进行检查，但也有所延<br>迟，或者给出一些不恰当的错误提示。你无需总是运行应用程序，假如仅仅做一些小的改变，那么编译工作可帮你做一个快速检查，这样可以返回添加下一行代码。<br>编译代码以确保应用程序不存在任何错误问题<br><img src="/images/效率就是生命，提高效率方法/11.png" alt="1419414281789495.png"><br><strong>文档和帮助</strong><br>在学习过程中，自助学习非常重要，对于没有浏览过Xcode文档帮助的开发者来说，这些快捷键可帮忙查看相关的代码参考，更好地理解苹果提供的代码，从而开发出性能更健壮的app。</p>
+<h4 id="13-_u6587_u6863_u548C_u53C2_u8003_3A_Command_+_Shift_+_0__28Zero_29"><a href="#13-_u6587_u6863_u548C_u53C2_u8003_3A_Command_+_Shift_+_0__28Zero_29" class="headerlink" title="13.文档和参考: Command + Shift + 0 (Zero)"></a>13.文档和参考: Command + Shift + 0 (Zero)</h4><p>使用Xcode在后台安装文档，并支持离线搜索查看，非常适合外出办公。打开文档和参考，并键入代码中的某个关键字，Xcode文档还提供了一些额外的资源和示例工程。<br>通过Documentation and Reference指南了解如何使用代码<br><img src="/images/效率就是生命，提高效率方法/12.png" alt="1419414295320542.png"></p>
+<ol>
+<li>快速帮助: 在类或者方法名上执行Option + Left-click操作<br>内联帮助可帮开发者快速学习类或代码片段的用法。在变量、类、或者方法名上执行Option + Left-click操作来获得更多细节信息。假使你点击了弹出视图底部的参考链接，那么就可以方便地跳转到Xcode提供的文档中。你还可以在变量、类或者方法名上执行Option+双击名称操作，从而更方便地跳转至文档。<br>编写代码时获得快速帮助<br><img src="/images/效率就是生命，提高效率方法/13.png" alt="1419414309703677.png"><br><strong>其他快捷键：</strong><br>“最近偏爱Command + Shift + J快捷操作，可展示当前你在工程导航器中打开的文件。我最近在大型代码库上花了不少日子，这个组合键可以快速地在代码库中跳转”<br>— weendex<br>“我超爱CTRL + 1，该快捷键可打开’Show Related Items‘弹出菜单’。倘若你已经将光标放在了任何方法中，并点击‘CTRL + 1 ’就可以很方便地通过弹出的视图访问该<br>方法的所有调用者和被调用者。我经常浏览方法的调用者从而了解如何使用该方法。”— skoll<br>“Cmd + . 方便地暂停运行iOS模拟器”— weendex<br>“我经常使用本文中没有提及的一个快捷操作，在文件上执行‘Command + Option + Shift + Left-click’操作，该组合键可展示一个小尺寸的弹出视图，你可以查看你想要打开它的地方，比如辅助编辑器、标签或者窗口等。” </li>
+</ol>
+<h1 id="u611F_u8C22_u548C_u53C2_u8003_u94FE_u63A5"><a href="#u611F_u8C22_u548C_u53C2_u8003_u94FE_u63A5" class="headerlink" title="感谢和参考链接"></a>感谢和参考链接</h1><p>link: <a href="http://www.cocoachina.com/ios/20141224/10752.html" target="_blank" rel="external">http://www.cocoachina.com/ios/20141224/10752.html</a><br>link: <a href="http://www.cocoachina.com/ios/20150717/12626.html" target="_blank" rel="external">http://www.cocoachina.com/ios/20150717/12626.html</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/工具/" rel="tag">#工具</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/07/24/Cocoapads使用入门/" rel="next" title="Cocoapads使用入门">
+                <i class="fa fa-chevron-left"></i> Cocoapads使用入门
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/03/05/入职同花顺有感/" rel="prev" title="入职同花顺有感">
+                入职同花顺有感 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="DavidCap" />
+          <p class="site-author-name" itemprop="name">DavidCap</p>
+          <p class="site-description motion-element" itemprop="description">iOS Coder的小屋</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">4</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/DavidCap" target="_blank">
+                  
+                    <i class="fa fa-git"></i> GitHub
+                  
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        <div class="links-of-blogroll motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Xcode__u7684_u6B66_u88C5"><span class="nav-number">1.</span> <span class="nav-text">Xcode 的武装</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#u63D2_u4EF6"><span class="nav-number">1.1.</span> <span class="nav-text">插件</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#u90A3_u4E9B_u597D_u7528_u7684_u8F6F_u4EF6"><span class="nav-number">2.</span> <span class="nav-text">那些好用的软件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Xcode_u5FEB_u6377_u952E"><span class="nav-number">3.</span> <span class="nav-text">Xcode快捷键</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-_u5DE5_u7A0B_u5BFC_u822A_u5668_3ACommand+1"><span class="nav-number">3.0.0.1.</span> <span class="nav-text">1.工程导航器:Command+1</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-_u663E_u793A/_u9690_u85CF_u5BFC_u822A_u5668_u9762_u677F_3ACommand+0"><span class="nav-number">3.0.0.2.</span> <span class="nav-text">2.显示/隐藏导航器面板:Command+0</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-_u663E_u793A/_u9690_u85CF_u5B9E_u7528_u5DE5_u5177_u9762_u677F_3ACommand+Option+0"><span class="nav-number">3.0.0.3.</span> <span class="nav-text">3.显示/隐藏实用工具面板:Command+Option+0</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-_u5728_u8F85_u52A9_u7F16_u8F91_u5668_u4E2D_u6253_u5F00_u6587_u4EF6_3A_u5728_u9879_u76EE_u5BFC_u822A_u5668_u4E2D_u9009_u4E2D_u6587_u4EF6_u6267_u884COption+_u5DE6_u952E_u70B9_u51FB_u64CD_u4F5C_u3002"><span class="nav-number">3.0.0.4.</span> <span class="nav-text">4.在辅助编辑器中打开文件:在项目导航器中选中文件执行Option+左键点击操作。</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Xcode_u641C_u7D22_u5FEB_u6377_u952E"><span class="nav-number">3.1.</span> <span class="nav-text">Xcode搜索快捷键</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#5-_u641C_u7D22_u5BFC_u822A_u5668_28Find_Navigator_uFF0C_u4E5F_u5C31_u662F_u641C_u7D22_29_3ACommand+Shift+F"><span class="nav-number">3.1.0.1.</span> <span class="nav-text">5.搜索导航器(Find Navigator，也就是搜索):Command+Shift+F</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-_u6587_u4EF6_u8DF3_u8F6C_u680F_3AControl+6_uFF08_u952E_u5165_u65B9_u6CD5/_u53D8_u91CF_u540D+Enter_u8DF3_u8F6C_uFF09"><span class="nav-number">3.1.0.2.</span> <span class="nav-text">6.文件跳转栏:Control+6（键入方法/变量名+Enter跳转）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-_u5FEB_u901F_u6253_u5F00_3A_Command_+_Shift_+_O"><span class="nav-number">3.1.0.3.</span> <span class="nav-text">7.快速打开: Command + Shift + O</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8-_u8DF3_u8F6C_u680F_u548C_u5FEB_u901F_u6253_u5F00_u641C_u7D22_u8F93_u5165_u5FEB_u6377_u952E"><span class="nav-number">3.1.0.4.</span> <span class="nav-text">8.跳转栏和快速打开搜索输入快捷键</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#9-__u7A0B_u5E8F_u4E2D_28Objective-C_u6216C++_u7F16_u5199_29-h_and_-m_u6587_u4EF6_u95F4_u7684_u5FEB_u901F_u5207_u6362_3A_Control_+_Command_+_Up_Arrow"><span class="nav-number">3.1.0.5.</span> <span class="nav-text">9. 程序中(Objective-C或C++编写).h and .m文件间的快速切换: Control + Command + Up Arrow</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#10-_u8FD0_u884Capp_3A_Command_+_R"><span class="nav-number">3.1.0.6.</span> <span class="nav-text">10.运行app: Command + R</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#11-_u6E05_u9664_u5DE5_u7A0B_3A_Command_+_Shift_+_K"><span class="nav-number">3.1.0.7.</span> <span class="nav-text">11.清除工程: Command + Shift + K</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#12-_u6784_u5EFA_u5E94_u7528_u7A0B_u5E8F_3A_Command_+_B"><span class="nav-number">3.1.0.8.</span> <span class="nav-text">12.构建应用程序: Command + B</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#13-_u6587_u6863_u548C_u53C2_u8003_3A_Command_+_Shift_+_0__28Zero_29"><span class="nav-number">3.1.0.9.</span> <span class="nav-text">13.文档和参考: Command + Shift + 0 (Zero)</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#u611F_u8C22_u548C_u53C2_u8003_u94FE_u63A5"><span class="nav-number">4.</span> <span class="nav-text">感谢和参考链接</span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">DavidCap</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+
+  
+
+
+
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+  
+  
+<script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = NexT.utils.escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    NexT.motion.middleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+
+      if (CONFIG.sidebar.display === 'post' || CONFIG.sidebar.display === 'always') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          NexT.utils.displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';                
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = true;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = data.url;
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '' && data_content != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title < 0 && index_content < 0 ){
+                                isMatch = false;
+                            } else {
+                                if (index_content < 0) {
+                                    index_content = 0;
+                                }
+                                if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            }
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+                            
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').mousedown(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+  
+
+  
+
+  
+
+</body>
+</html>

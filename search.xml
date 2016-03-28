@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  
+  
+    
+    <entry>
+      <title><![CDATA[iOS二维码扫描]]></title>
+      <url>http://yoursite.com/2016/03/28/iOS%E4%BA%8C%E7%BB%B4%E7%A0%81%E6%89%AB%E6%8F%8F/</url>
+      <content type="html"><![CDATA[<p>#iOS开发中 二维码扫描</p>
+<p>##前言<br>在移动开发中二维码扫描这种事情越来越常见了，在iOS中我选择了用ZBar这个第三方来实现。<br><br>原因有三：好用，好用，好用。<br><br>好了来点正经的干货吧。首先献上下载地址：<a href="https://github.com/bmorton/ZBarSDK" target="_blank" rel="external">快来点我</a><br><br>然后你就可以把整个 ZBar文件夹拉到你的项目的Lib之类的目录下面了。<br></p>
+<p>如果用pod，就直接 <strong>pod ‘ZBarSDK’, ‘~&gt; 1.3.1’</strong> ， 那么你就可以越过下面那个添加库类的步骤了。<br> </p>
+<p>ZBar的使用给我们俩种选择，一种是自定义一个二维码视图，另一种是用他们自带的二维码视图（奇丑无比）。</p>
+<p>##添加库类<br>如下添加这些库类。<br></p>
+<p><img src="/images/iOS二维码扫描/1.png" alt="ZBar库类"></p>
+<p>##自定义二维码视图<br>一般都是给一个按钮绑定一个点击事件，然后当按钮点击的时候 就会调用二维码扫描，然后扫描成功就返回。<br><br>就像下面这个demo截图一样。<br></p>
+<p><img src="/images/iOS二维码扫描/2.png" alt="Demo截图.png"><br></p>
+<p>然后就是正题了，我们首先要<figure class="highlight"><figcaption><span>"ZBarSDK.h"```.然后自定义的话 就要遵循这个代理```<zbarreaderviewdelegate>```<br></zbarreaderviewdelegate></span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#60;!-- more --&#62;&#10;&#28982;&#21518;&#23601;&#21487;&#20197;&#22312;&#28857;&#20987;&#30340;&#22238;&#35843;&#20989;&#25968;&#20013;&#35774;&#32622;&#22914;&#19979;&#65306;</span><br></pre></td></tr></table></figure></p>
+<pre><code>// Do any additional setup after loading the view.
+//初始化照相机窗口 这个readview 就是要美化的view
+ZBarReaderView *readview = [ZBarReaderView new];
+//自定义大小
+readview.frame = CGRectMake(100, 100, 300, 300);
+//自定义添加相关指示.........发挥各自的APP的想象力
+//此处省略美化10000行代码...................
+//………………………..
+// 好进入正题—— 接着设置好代理
+readview.readerDelegate = self;
+
+//将其照相机拍摄视图添加到要显示的视图上
+[self.view addSubview:readview];
+
+
+//二维码/条形码识别设置
+ZBarImageScanner *scanner = readview.scanner;
+
+[scanner setSymbology: ZBAR_I25
+               config: ZBAR_CFG_ENABLE
+                   to: 0];
+//启动，必须启动后，手机摄影头拍摄的即时图像菜可以显示在readview上
+[readview start];
+</code></pre><figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">还要实现如下<span class="keyword">delegate</span>方法，监听扫描成功回调：</span><br></pre></td></tr></table></figure>
+<p>-(void)readerView:(ZBarReaderView <em>)readerView didReadSymbols:(ZBarSymbolSet </em>)symbols fromImage:(UIImage <em>)image<br>{<br>    ZBarSymbol </em>symbol = nil;<br>    for (symbol in symbols)<br>    {<br>        break;<br>    }<br>    //扫描成功，让readerView消失<br>    [readerView removeFromSuperview];</p>
+<pre><code>//这个是二维码得到的数据
+NSString *data = symbol.data;
+//数据处理 
+//.......
+</code></pre><p>}</p>
+<figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">##自带的二维码视图</span><br><span class="line">和上面不同的是，这次我们要遵从的delegate变了是<span class="escape">``</span><span class="escape">`&lt;</span>ZBarReaderDelegate&gt;<span class="escape">``</span><span class="escape">`.</span>&lt;br&gt;</span><br><span class="line"></span><br><span class="line">然后再cilck方法里实现以下代码：</span><br></pre></td></tr></table></figure>
+<pre><code>//初始化相机控制器
+ZBarReaderViewController *reader = [ZBarReaderViewController new];
+//设置代理
+reader.readerDelegate = self;
+//基本适配
+reader.supportedOrientationsMask = ZBarOrientationMaskAll;
+
+//二维码/条形码识别设置
+ZBarImageScanner *scanner = reader.scanner;
+
+[scanner setSymbology: ZBAR_I25
+               config: ZBAR_CFG_ENABLE
+                   to: 0];
+//弹出系统照相机，全屏拍摄
+[self presentModalViewController: reader animated: YES];
+</code></pre><figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">然后实现以下的<span class="keyword">delegate</span>.</span><br></pre></td></tr></table></figure>
+<p>-(void)imagePickerController:(UIImagePickerController <em>)picker didFinishPickingMediaWithInfo:(NSDictionary </em>)info<br>{<br>    id<nsfastenumeration> symbols = [info objectForKey:ZBarReaderControllerResults];</nsfastenumeration></p>
+<pre><code>ZBarSymbol *symbol = nil;
+for (symbol in symbols)
+{
+    break;
+}
+
+[picker dismissModalViewControllerAnimated:YES];
+
+//数据
+NSString *data = symbol.data;
+</code></pre><p>}</p>
+<figure class="highlight vala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="preprocessor">##我自定义的 二维码View</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>(void)setOverlayPickerView:(ZBarReaderView *)reader<br>{</p>
+<p>  //清除原有控件</p>
+<p>  for (UIView *temp in [reader subviews]) {</p>
+<pre><code>for (UIButton *button in [temp subviews]) {
+
+    if ([button isKindOfClass:[UIButton class]]) {
+
+        [button removeFromSuperview];
+
+    }
+
+}
+
+for (UIToolbar *toolbar in [temp subviews]) {
+
+    if ([toolbar isKindOfClass:[UIToolbar class]]) {
+
+        [toolbar setHidden:YES];
+
+        [toolbar removeFromSuperview];
+
+    }
+
+}
+</code></pre><p>  }</p>
+<p>  /*<br>  //画中间的基准线 可有可无 个人爱好</p>
+<p>  UIView* line = [[UIView alloc] initWithFrame:CGRectMake(40, 220, 240, 1)];</p>
+<p>  line.backgroundColor = [UIColor redColor];</p>
+<p>  [reader addSubview:line];<br>  */</p>
+</li>
+</ul>
+<pre><code>//最上部view
+
+UIView* upView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 80)];
+
+upView.alpha = 0.3;
+
+upView.backgroundColor = [UIColor blackColor];
+
+[reader addSubview:upView];
+
+
+//左侧的view
+
+UIView *leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 80, 20, 280)];
+
+leftView.alpha = 0.3;
+
+leftView.backgroundColor = [UIColor blackColor];
+
+[reader addSubview:leftView];
+
+
+
+//右侧的view
+
+UIView *rightView = [[UIView alloc] initWithFrame:CGRectMake(300, 80, 20, 280)];
+
+rightView.alpha = 0.3;
+
+rightView.backgroundColor = [UIColor blackColor];
+
+[reader addSubview:rightView];
+
+
+
+//底部view
+
+UIView * downView = [[UIView alloc] initWithFrame:CGRectMake(0, 360, 320, 120)];
+
+downView.alpha = 0.3;
+
+downView.backgroundColor = [UIColor blackColor];
+
+[reader addSubview:downView];
+
+
+//用于说明的label
+
+UILabel * labIntroudction= [[UILabel alloc] init];
+
+labIntroudction.backgroundColor = [UIColor clearColor];
+
+labIntroudction.frame=CGRectMake((ScreenW - 280)*0.5,8, 280, 40);
+
+labIntroudction.numberOfLines=2;
+
+labIntroudction.textColor=[UIColor whiteColor];
+
+labIntroudction.font = Font(15);
+
+labIntroudction.text=@&quot;将二维码图像置于矩形方框内&quot;;
+labIntroudction.textAlignment = NSTextAlignmentCenter;
+
+[downView addSubview:labIntroudction];
+
+/*
+//用于取消操作的button 可有可无
+
+UIButton *cancelButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+
+cancelButton.alpha = 0.4;
+
+[cancelButton setFrame:CGRectMake(20, 390, 280, 40)];
+
+[cancelButton setTitle:@&quot;将二维码图像置于矩形方框内&quot; forState:UIControlStateNormal];
+
+[cancelButton.titleLabel setFont:[UIFont boldSystemFontOfSize:20]];
+
+[cancelButton addTarget:self action:@selector(dismissOverlayView:)forControlEvents:UIControlEventTouchUpInside];  
+
+[reader addSubview:cancelButton];
+ */
+</code></pre><p>}<br>```</p>
+<p>##总结<br>俩种方式都挺简单的，建议用自定义的，因为灵活 漂亮。</p>
+<p>##参考致谢<br><a href="http://www.yanyulin.info/pages/2015/01/25901846652567.html" target="_blank" rel="external">http://www.yanyulin.info/pages/2015/01/25901846652567.html</a></p>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[入职同花顺有感]]></title>
+      <url>http://yoursite.com/2016/03/05/%E5%85%A5%E8%81%8C%E5%90%8C%E8%8A%B1%E9%A1%BA%E6%9C%89%E6%84%9F/</url>
+      <content type="html"><![CDATA[<p>#入职同花顺有感</p>
+<p>##前言<br>这俩星期可以说是我最累的俩个星期，经历了很多这辈子都没有经历的事情。租房子，正式的iOS技术面，搬家，零零碎碎的东西卖，忍受一个人住的孤独，加班。累……<br><br><strong>slogan:</strong>但是人总要学着长大的，人总要学着一个人，总要学着累。<br></p>
+<p>##关于面试<br><br>同花顺面试对技术要求还是挺高的，问的问题都是比较有水平的。不像以前在小公司 CTO基本不了解iOS，一出来就是和你聊聊简历上的东西 聊聊人生理想的。<br><br>一面的时候，问的还是比较简单的，问一些循环引用，weak assign 区别，iOS 优化工具啊，项目经历，工作流程(这个应该是确定一下我是不是培训的)。还算顺利吧 一面，基本能聊上天。<br><br>二面的时候，问msg_send底层实现(这我没答上，看过忘了 需要加强)，如果你要写一个TableView你要怎么写(主要考察 Cell循环利用这块)。二面就被虐的比较惨了，特别是第一个问题 我们聊了好久，我也没有说出个所以然来(捂脸 尴尬)。看来自己要走的路还很长。<br><br>三面的时候，聊聊钱 聊聊人生理想 聊聊会不会跳槽等等，这个就聊的比较开心了，因为这种事情反正没什么难点的。<br><br>面试大体就这么结束了，2天后他们就叫我去上班了(实习岗，我还未毕业)。然后我就要开始租房子了。<br><br><a id="more"></a></p>
+<p>##关于入职and加班<br>同花顺和我以前的公司最大的不同就是加班文化很严重，基本下班了没人走。我一小实习生，老大都没动 我就提早滚犊子 这样不好吧。<br><br>基本上每天回到家 都9点+了。其实也还好 早上基本没什么要求，9点前到就好了。<br><br>可能我还没适应从6点下班到9点下班这个变化，所以我感觉到了累。其实习惯之后应该也还好<br></p>
+<p>##关于团队氛围<br>团队氛围，单从iOS技术氛围来说 还是比较好的，每周有分享会 这个还是挺有趣的。从大牛身上学点东西。<br><br>从人员和谐性来说，还是微海汇的团队比较和谐，在微海汇 每个月我们可以和CTO一起出去喝酒 聊天 熟悉彼此。虽然同花顺每星期都聚餐，都是大家都是管自己吃饭 所以没有什么感觉。不像以前可以大家喝喝酒 酒桌上大家自然变得很熟。<br></p>
+<p>##关于抉择<br>我不后悔我去同花顺这个抉择，从自己技术成长来说，这是一个正确的选择，可能现在感到累 感到孤独 感到团队压抑 感到工作压力。但是技术成长也会比较快，我不后悔 我只希望我干了几年之后 能再次加入像微海汇这样的舒服的团队，可以和自己的领导更像是朋友的领导一起工作。等到领导的肯定，比拿20K还让人高兴。</p>
+<p>##关于计划<br>接下来我要努力加班，努力成长 让自己的技术更屌，可以支撑起自己庞大的梦想。<br></p>
+<p>##最后<br>David 加油。最爱我的家人们 我想你们。</p>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[效率就是生命，提高效率方法]]></title>
+      <url>http://yoursite.com/2015/07/25/%E6%95%88%E7%8E%87%E5%B0%B1%E6%98%AF%E7%94%9F%E5%91%BD%EF%BC%8C%E6%8F%90%E9%AB%98%E6%95%88%E7%8E%87%E6%96%B9%E6%B3%95/</url>
+      <content type="html"><![CDATA[<h1 id="Xcode__u7684_u6B66_u88C5"><a href="#Xcode__u7684_u6B66_u88C5" class="headerlink" title="Xcode 的武装"></a>Xcode 的武装</h1><h2 id="u63D2_u4EF6"><a href="#u63D2_u4EF6" class="headerlink" title="插件"></a>插件</h2><ol>
+<li>最好用的代码补齐插件，没有之一<br><br>FuzzyAutocompletePlugin是一个Xcode 5兼容的插件，通过添加模糊匹配来提高Xcode代码自动补全功能，开发者无需遵循从头匹配的原则，只要记得方法里某个关键字即可进行匹配，很好地提高了工作效率。<br>注意：该插件只在Xcode 5上进行过测试，没有测试和其他插件之间的兼容性（KSImageNamed除外）。<br>项目地址：<a href="https://github.com/chendo/FuzzyAutocompletePlugin" target="_blank" rel="external">https://github.com/chendo/FuzzyAutocompletePlugin</a></li>
+</ol>
+<a id="more"></a>
+<ol>
+<li><p>最好用的图片名字补齐插件，没有之一<br><br>为项目中使用的UIImage的imageNamed提供文件名自动补全功能。使用[UIImage imageNamed:@”xxx”]时，该插件会扫描整个workspace中的图片文件。<br>项目地址： <a href="https://github.com/ksuther/KSImageNamed-Xcode" target="_blank" rel="external">https://github.com/ksuther/KSImageNamed-Xcode</a></p>
+</li>
+<li><p>最好用的代码注释插件<br>VVDocumenter,很多时候，为了快速开发，很多的技术文档都是能省则省，这个时候注释就变得异常重要，再配合Doxygen这种注释自动生成文档的，就完美了。但是每次都要手动输入规范化的注释，着实也麻烦，但有了VVDocumenter，规范化的注释，主需要输入三个斜线“///”，就OK啦！（VVDocumenter在Mac OSX 10.8.5和Xcode 4.6.3上进行开发，应该能支持所有Xcode 4版本，如果想支持Xcode 5，可以对plist文件稍作修改。<br>项目地址：<a href="https://github.com/onevcat/VVDocumenter-Xcode" target="_blank" rel="external">https://github.com/onevcat/VVDocumenter-Xcode</a></p>
+</li>
+<li><p>最好用的代码对齐。<br>XAlign，一个用来对齐常规代码的Xcode插件，十分强大的自定义对齐模式。这里是一个对齐模式示例，模式文件在main/main/patterns.plist.<br>详细信息可参看：<a href="https://github.com/qfish/XAlign" target="_blank" rel="external">https://github.com/qfish/XAlign</a></p>
+</li>
+</ol>
+<h1 id="u90A3_u4E9B_u597D_u7528_u7684_u8F6F_u4EF6"><a href="#u90A3_u4E9B_u597D_u7528_u7684_u8F6F_u4EF6" class="headerlink" title="那些好用的软件"></a>那些好用的软件</h1><ol>
+<li><p>标注px工具<br>当UI给你一大堆设计稿的时候，而你又不确定各个控件之间间距的时候，这款软件可以很大的帮助你。 —– 马克鳗图标。<br>可以方便的标注图标之间的像素位，颜色的RGB等。百度一下可以找到的。</p>
+</li>
+<li><p>图片生成工具<br>当你有一个@2x的时候，这个软件就能很方便的帮你生成其他size的图片。<br>参考地址：<a href="http://www.cocoachina.com/bbs/read.php?tid-290247-keyword-icon.html" target="_blank" rel="external">http://www.cocoachina.com/bbs/read.php?tid-290247-keyword-icon.html</a><br>或者：<a href="https://itunes.apple.com/tw/app/prepo/id476533227?mt=12" target="_blank" rel="external">https://itunes.apple.com/tw/app/prepo/id476533227?mt=12</a></p>
+</li>
+<li><p>JSON<br>当你测试API的时候，得到一串JSON的数据，太难看了，没有补齐，这还让不让人活啦。这个时候你就需要chrome的一个优秀的插件了。JSONView。这样就可以在浏览器上方便的查看JSON了。<br>参考链接：<a href="http://www.chromein.com/crx_11247.html" target="_blank" rel="external">http://www.chromein.com/crx_11247.html</a></p>
+</li>
+</ol>
+<h1 id="Xcode_u5FEB_u6377_u952E"><a href="#Xcode_u5FEB_u6377_u952E" class="headerlink" title="Xcode快捷键"></a>Xcode快捷键</h1><h4 id="1-_u5DE5_u7A0B_u5BFC_u822A_u5668_3ACommand+1"><a href="#1-_u5DE5_u7A0B_u5BFC_u822A_u5668_3ACommand+1" class="headerlink" title="1.工程导航器:Command+1"></a>1.工程导航器:Command+1</h4><p>快速浏览代码、图片以及用户界面文件。<br><img src="/images/效率就是生命，提高效率方法/1.png" alt="1419413830714452.png"></p>
+<h4 id="2-_u663E_u793A/_u9690_u85CF_u5BFC_u822A_u5668_u9762_u677F_3ACommand+0"><a href="#2-_u663E_u793A/_u9690_u85CF_u5BFC_u822A_u5668_u9762_u677F_3ACommand+0" class="headerlink" title="2.显示/隐藏导航器面板:Command+0"></a>2.显示/隐藏导航器面板:Command+0</h4><p>当你在对屏幕进行截图的时候可能会想要隐藏起与你感兴趣内容的无关的部分。假如你想要使用辅助编辑器或者想要设计用户界面并将其连接到代码的时候，这个快捷键会相当有用。<br><img src="/images/效率就是生命，提高效率方法/2.png" alt="1419413840169392.png"></p>
+<h4 id="3-_u663E_u793A/_u9690_u85CF_u5B9E_u7528_u5DE5_u5177_u9762_u677F_3ACommand+Option+0"><a href="#3-_u663E_u793A/_u9690_u85CF_u5B9E_u7528_u5DE5_u5177_u9762_u677F_3ACommand+Option+0" class="headerlink" title="3.显示/隐藏实用工具面板:Command+Option+0"></a>3.显示/隐藏实用工具面板:Command+Option+0</h4><p>实用工具面板主要用于编辑用户界面文件时，在你只考虑写代码的时候，就可以隐藏它。<br><img src="/images/效率就是生命，提高效率方法/3.png" alt="1419413850557026.png"></p>
+<h4 id="4-_u5728_u8F85_u52A9_u7F16_u8F91_u5668_u4E2D_u6253_u5F00_u6587_u4EF6_3A_u5728_u9879_u76EE_u5BFC_u822A_u5668_u4E2D_u9009_u4E2D_u6587_u4EF6_u6267_u884COption+_u5DE6_u952E_u70B9_u51FB_u64CD_u4F5C_u3002"><a href="#4-_u5728_u8F85_u52A9_u7F16_u8F91_u5668_u4E2D_u6253_u5F00_u6587_u4EF6_3A_u5728_u9879_u76EE_u5BFC_u822A_u5668_u4E2D_u9009_u4E2D_u6587_u4EF6_u6267_u884COption+_u5DE6_u952E_u70B9_u51FB_u64CD_u4F5C_u3002" class="headerlink" title="4.在辅助编辑器中打开文件:在项目导航器中选中文件执行Option+左键点击操作。"></a>4.在辅助编辑器中打开文件:在项目导航器中选中文件执行Option+左键点击操作。</h4><p>一个快速打开Assistant Editor的方式–只需要按住Option键并点击你想要在当前编辑框右边打开的文件即可。<br><img src="/images/效率就是生命，提高效率方法/4.png" alt="1419413874412106.png"></p>
+<h2 id="Xcode_u641C_u7D22_u5FEB_u6377_u952E"><a href="#Xcode_u641C_u7D22_u5FEB_u6377_u952E" class="headerlink" title="Xcode搜索快捷键"></a>Xcode搜索快捷键</h2><p>当你在敲代码的时候，突然想加个什么功能，或者想修改个什么Bug，当然最快的方法就是用查找啦。无需用滚轮穿越百行代码，只需要使用查找，就可以直接跳到特定的代码段。</p>
+<h4 id="5-_u641C_u7D22_u5BFC_u822A_u5668_28Find_Navigator_uFF0C_u4E5F_u5C31_u662F_u641C_u7D22_29_3ACommand+Shift+F"><a href="#5-_u641C_u7D22_u5BFC_u822A_u5668_28Find_Navigator_uFF0C_u4E5F_u5C31_u662F_u641C_u7D22_29_3ACommand+Shift+F" class="headerlink" title="5.搜索导航器(Find Navigator，也就是搜索):Command+Shift+F"></a>5.搜索导航器(Find Navigator，也就是搜索):Command+Shift+F</h4><p>使用项目搜索可以找到某个变量或方法名的被提到的次数。可以依据实例来匹配，并可忽略大小写字母。另外还可以对查找的变量名进行替换。<br><img src="/images/效率就是生命，提高效率方法/5.png" alt="1419413934202572.png"></p>
+<h4 id="6-_u6587_u4EF6_u8DF3_u8F6C_u680F_3AControl+6_uFF08_u952E_u5165_u65B9_u6CD5/_u53D8_u91CF_u540D+Enter_u8DF3_u8F6C_uFF09"><a href="#6-_u6587_u4EF6_u8DF3_u8F6C_u680F_3AControl+6_uFF08_u952E_u5165_u65B9_u6CD5/_u53D8_u91CF_u540D+Enter_u8DF3_u8F6C_uFF09" class="headerlink" title="6.文件跳转栏:Control+6（键入方法/变量名+Enter跳转）"></a>6.文件跳转栏:Control+6（键入方法/变量名+Enter跳转）</h4><p>跳转至当前代码文件中的代码行。如果文件中有上千行代码，你可以通过该快捷操作来缩小查找范围，从而在需要的地方插入代码以添加新的功能。<br><img src="/images/效率就是生命，提高效率方法/6.png" alt="1419413945333622.png"></p>
+<h4 id="7-_u5FEB_u901F_u6253_u5F00_3A_Command_+_Shift_+_O"><a href="#7-_u5FEB_u901F_u6253_u5F00_3A_Command_+_Shift_+_O" class="headerlink" title="7.快速打开: Command + Shift + O"></a>7.快速打开: Command + Shift + O</h4><p>喜欢使用键盘但不喜欢使用鼠标的人会大爱这个快捷方式，可以直接跳转到某个方法定义或者指定的代码文件。<br><img src="/images/效率就是生命，提高效率方法/7.png" alt="1419413982800551.png"></p>
+<h4 id="8-_u8DF3_u8F6C_u680F_u548C_u5FEB_u901F_u6253_u5F00_u641C_u7D22_u8F93_u5165_u5FEB_u6377_u952E"><a href="#8-_u8DF3_u8F6C_u680F_u548C_u5FEB_u901F_u6253_u5F00_u641C_u7D22_u8F93_u5165_u5FEB_u6377_u952E" class="headerlink" title="8.跳转栏和快速打开搜索输入快捷键"></a>8.跳转栏和快速打开搜索输入快捷键</h4><p>键入第一个字母即可快速切换至某个文件或者找到特定的代码行。比如，在ViewController.Swift文件中，按下Command + Shift + O，然后键入vDL，最先展示的结果是带有<br>viewDidLoad()名的函数。<br>键入首字母，以较少输入搜索更多。<br><img src="/images/效率就是生命，提高效率方法/8.png" alt="1419413999447964.png"></p>
+<h4 id="9-__u7A0B_u5E8F_u4E2D_28Objective-C_u6216C++_u7F16_u5199_29-h_and_-m_u6587_u4EF6_u95F4_u7684_u5FEB_u901F_u5207_u6362_3A_Control_+_Command_+_Up_Arrow"><a href="#9-__u7A0B_u5E8F_u4E2D_28Objective-C_u6216C++_u7F16_u5199_29-h_and_-m_u6587_u4EF6_u95F4_u7684_u5FEB_u901F_u5207_u6362_3A_Control_+_Command_+_Up_Arrow" class="headerlink" title="9. 程序中(Objective-C或C++编写).h and .m文件间的快速切换: Control + Command + Up Arrow"></a>9. 程序中(Objective-C或C++编写).h and .m文件间的快速切换: Control + Command + Up Arrow</h4><p>如果你用Objective-C和C++编写程序，或者使用其他语言编写的开源代码，那你可能需要查找现有的代码。你可以使用“Control + Command + Up Arrow”组合键操作在两个<br>相关的文件间快速切换，比如Objective-C中的头文件和实现文件。假如你使用Swift编写代码，这就有点不合适了，因为Swift使用单一代码文件。<br><strong>应用程序编译和清理</strong><br>在体验新应用之前你必须先运行它，不过有时候Xcode会不大给力，不能很好地运行你的项目，这时候你就需要清除不能运行的项目。<br>以下快捷键可帮你在代码编写过程中尽可能少地使用鼠标。</p>
+<h4 id="10-_u8FD0_u884Capp_3A_Command_+_R"><a href="#10-_u8FD0_u884Capp_3A_Command_+_R" class="headerlink" title="10.运行app: Command + R"></a>10.运行app: Command + R</h4><p>在编写代码的过程中，我通常会使用该快捷键来自由运行应用程序。尽可能地测试应用程序，这样你可以在早期找到并修复应用中的bug。<br><img src="/images/效率就是生命，提高效率方法/9.png" alt="1419414205765953.png"></p>
+<h4 id="11-_u6E05_u9664_u5DE5_u7A0B_3A_Command_+_Shift_+_K"><a href="#11-_u6E05_u9664_u5DE5_u7A0B_3A_Command_+_Shift_+_K" class="headerlink" title="11.清除工程: Command + Shift + K"></a>11.清除工程: Command + Shift + K</h4><p>或许有那么一次Xcode运行出现问题，或者应用无法响应，或者出现了意料之外的情况，你首先会想要清除工程并再次运行它。如果这样都还不能解决问题，好吧，关掉Xcode<br>，重新打开。倘若应用程序无法运行，先看看有没有错误信息提示，你可以发挥作为“Googler”的优势来获得帮助。不过这种做法不易太过频繁，它会降低程序的开发速度。它将移除所有的中间文件，而再造这些文件还要花费时间。<br>当运行失败时清除Xcode工程<br><img src="/images/效率就是生命，提高效率方法/10.png" alt="1419414231730618.png"></p>
+<h4 id="12-_u6784_u5EFA_u5E94_u7528_u7A0B_u5E8F_3A_Command_+_B"><a href="#12-_u6784_u5EFA_u5E94_u7528_u7A0B_u5E8F_3A_Command_+_B" class="headerlink" title="12.构建应用程序: Command + B"></a>12.构建应用程序: Command + B</h4><p>检查所写代码以确保其正常工作是你经常要做的事情，编译app工程可让你在编写下一个特性之前确定其是否正常工作。即便Xcode在代码编写后会很快进行检查，但也有所延<br>迟，或者给出一些不恰当的错误提示。你无需总是运行应用程序，假如仅仅做一些小的改变，那么编译工作可帮你做一个快速检查，这样可以返回添加下一行代码。<br>编译代码以确保应用程序不存在任何错误问题<br><img src="/images/效率就是生命，提高效率方法/11.png" alt="1419414281789495.png"><br><strong>文档和帮助</strong><br>在学习过程中，自助学习非常重要，对于没有浏览过Xcode文档帮助的开发者来说，这些快捷键可帮忙查看相关的代码参考，更好地理解苹果提供的代码，从而开发出性能更健壮的app。</p>
+<h4 id="13-_u6587_u6863_u548C_u53C2_u8003_3A_Command_+_Shift_+_0__28Zero_29"><a href="#13-_u6587_u6863_u548C_u53C2_u8003_3A_Command_+_Shift_+_0__28Zero_29" class="headerlink" title="13.文档和参考: Command + Shift + 0 (Zero)"></a>13.文档和参考: Command + Shift + 0 (Zero)</h4><p>使用Xcode在后台安装文档，并支持离线搜索查看，非常适合外出办公。打开文档和参考，并键入代码中的某个关键字，Xcode文档还提供了一些额外的资源和示例工程。<br>通过Documentation and Reference指南了解如何使用代码<br><img src="/images/效率就是生命，提高效率方法/12.png" alt="1419414295320542.png"></p>
+<ol>
+<li>快速帮助: 在类或者方法名上执行Option + Left-click操作<br>内联帮助可帮开发者快速学习类或代码片段的用法。在变量、类、或者方法名上执行Option + Left-click操作来获得更多细节信息。假使你点击了弹出视图底部的参考链接，那么就可以方便地跳转到Xcode提供的文档中。你还可以在变量、类或者方法名上执行Option+双击名称操作，从而更方便地跳转至文档。<br>编写代码时获得快速帮助<br><img src="/images/效率就是生命，提高效率方法/13.png" alt="1419414309703677.png"><br><strong>其他快捷键：</strong><br>“最近偏爱Command + Shift + J快捷操作，可展示当前你在工程导航器中打开的文件。我最近在大型代码库上花了不少日子，这个组合键可以快速地在代码库中跳转”<br>— weendex<br>“我超爱CTRL + 1，该快捷键可打开’Show Related Items‘弹出菜单’。倘若你已经将光标放在了任何方法中，并点击‘CTRL + 1 ’就可以很方便地通过弹出的视图访问该<br>方法的所有调用者和被调用者。我经常浏览方法的调用者从而了解如何使用该方法。”— skoll<br>“Cmd + . 方便地暂停运行iOS模拟器”— weendex<br>“我经常使用本文中没有提及的一个快捷操作，在文件上执行‘Command + Option + Shift + Left-click’操作，该组合键可展示一个小尺寸的弹出视图，你可以查看你想要打开它的地方，比如辅助编辑器、标签或者窗口等。” </li>
+</ol>
+<h1 id="u611F_u8C22_u548C_u53C2_u8003_u94FE_u63A5"><a href="#u611F_u8C22_u548C_u53C2_u8003_u94FE_u63A5" class="headerlink" title="感谢和参考链接"></a>感谢和参考链接</h1><p>link: <a href="http://www.cocoachina.com/ios/20141224/10752.html" target="_blank" rel="external">http://www.cocoachina.com/ios/20141224/10752.html</a><br>link: <a href="http://www.cocoachina.com/ios/20150717/12626.html" target="_blank" rel="external">http://www.cocoachina.com/ios/20150717/12626.html</a></p>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Cocoapads使用入门]]></title>
+      <url>http://yoursite.com/2015/07/24/Cocoapads%E4%BD%BF%E7%94%A8%E5%85%A5%E9%97%A8/</url>
+      <content type="html"><![CDATA[<h1 id="Cocoapads__u4F7F_u7528_u5165_u95E8_u4ECB_u7ECD"><a href="#Cocoapads__u4F7F_u7528_u5165_u95E8_u4ECB_u7ECD" class="headerlink" title="Cocoapads 使用入门介绍"></a>Cocoapads 使用入门介绍</h1><h2 id="u7B2C_u4E00__u5B89_u88C5"><a href="#u7B2C_u4E00__u5B89_u88C5" class="headerlink" title="第一 安装"></a>第一 安装</h2><p>中国特色Cocoapads安装<br><br>在Mac的命令行中打入：</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//更新</span></span><br><span class="line">sudo gem update --system</span><br><span class="line"><span class="comment">//去除国外的ruby镜像 （有墙）</span></span><br><span class="line">gem sources --remove <span class="string">https:</span><span class="comment">//rubygems.org/</span></span><br><span class="line"><span class="comment">//设置为 某宝的镜像</span></span><br><span class="line">gem sources -a <span class="string">https:</span><span class="comment">//ruby.taobao.org/</span></span><br><span class="line"><span class="comment">//安装</span></span><br><span class="line">sudo gem install cocoapods</span><br><span class="line">pod setup</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<p>等一下下就安装好了 </p>
+<h2 id="u7B2C_u4E8C__u4F7F_u7528"><a href="#u7B2C_u4E8C__u4F7F_u7528" class="headerlink" title="第二 使用"></a>第二 使用</h2><p>例如我要添加 AFNetworking,那么如下：<br></p>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//cd 到一个有Xcode项目的地方</span></span><br><span class="line"><span class="keyword">cd</span> ~/Path/Developer/PodTest</span><br><span class="line"><span class="comment">//就像git一下 初始化一下</span></span><br><span class="line">pod init</span><br><span class="line"><span class="comment">//打开podfile（最好用Xcode打开）</span></span><br><span class="line"><span class="keyword">open</span> -a Xcode Podfile</span><br></pre></td></tr></table></figure>
+<p>然后你就会看到 大概这个样子的东西</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor"># Uncomment this <span class="keyword">line</span> to <span class="keyword">define</span> a global platform for your project</span></span><br><span class="line"><span class="preprocessor"># platform :ios, <span class="string">"6.0"</span></span></span><br><span class="line"> </span><br><span class="line">target <span class="string">"PodTest"</span> <span class="keyword">do</span></span><br><span class="line"> </span><br><span class="line">end</span><br></pre></td></tr></table></figure>
+<p>然后你把  # platform :ios, “6.0” 改动一下，例如我的<br></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">platform</span> <span class="pseudo">:ios</span>, "8<span class="class">.0</span>"</span><br></pre></td></tr></table></figure>
+<p>然后在 target 下面添加要的第三方，例如</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">pod</span> <span class="string">'AFNetworking'</span>, <span class="string">'2.2.1'</span></span><br></pre></td></tr></table></figure>
+<p>然后把podfile文件保存 关闭。<br><br>然后切换带命令行。</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pod <span class="keyword">install</span></span><br></pre></td></tr></table></figure>
+<p>然后看到如下</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Analyzing <span class="keyword">dependencies</span></span><br><span class="line">Downloading <span class="keyword">dependencies</span></span><br><span class="line">Installing AFNetworking (<span class="number">2.2</span>.<span class="number">1</span>)</span><br><span class="line">Generating Pods <span class="keyword">project</span></span><br><span class="line">Integrating client <span class="keyword">project</span></span><br><span class="line">[!] <span class="keyword">From</span> now on use `PodTest.xcworkspace`.</span><br></pre></td></tr></table></figure>
+<p>然后之后，只要打开那个workspace就可以用了。</p>
+<h2 id="Tip"><a href="#Tip" class="headerlink" title="Tip"></a>Tip</h2><p>如果停在Analyzing dependencies不动了，不要紧张，应该是cocoapods在更新自己的组件。如果你有耐心等等也可以，如果你和我一样没耐心就可以用下面方法停止其更新。</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pod install --<span class="keyword">verbose</span> --<span class="keyword">no</span>-repo-<span class="keyword">update</span></span><br><span class="line">pod <span class="keyword">update</span> --<span class="keyword">verbose</span> --<span class="keyword">no</span>-repo-<span class="keyword">update</span></span><br></pre></td></tr></table></figure>
+<h2 id="u53C2_u8003_u94FE_u63A5"><a href="#u53C2_u8003_u94FE_u63A5" class="headerlink" title="参考链接"></a>参考链接</h2><p>link：<a href="http://www.raywenderlich.com/64546/introduction-to-cocoapods-2" target="_blank" rel="external">http://www.raywenderlich.com/64546/introduction-to-cocoapods-2</a></p>
+]]></content>
+    </entry>
+    
+  
+  
+</search>
