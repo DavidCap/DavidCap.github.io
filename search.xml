@@ -6,13 +6,12 @@
     <entry>
       <title><![CDATA[iOS二维码扫描]]></title>
       <url>http://yoursite.com/2016/03/28/iOS%E4%BA%8C%E7%BB%B4%E7%A0%81%E6%89%AB%E6%8F%8F/</url>
-      <content type="html"><![CDATA[<p>#iOS开发中 二维码扫描</p>
-<p>##前言<br>在移动开发中二维码扫描这种事情越来越常见了，在iOS中我选择了用ZBar这个第三方来实现。<br><br>原因有三：好用，好用，好用。<br><br>好了来点正经的干货吧。首先献上下载地址：<a href="https://github.com/bmorton/ZBarSDK" target="_blank" rel="external">快来点我</a><br><br>然后你就可以把整个 ZBar文件夹拉到你的项目的Lib之类的目录下面了。<br></p>
+      <content type="html"><![CDATA[<h1 id="iOS_u5F00_u53D1_u4E2D__u4E8C_u7EF4_u7801_u626B_u63CF"><a href="#iOS_u5F00_u53D1_u4E2D__u4E8C_u7EF4_u7801_u626B_u63CF" class="headerlink" title="iOS开发中 二维码扫描"></a>iOS开发中 二维码扫描</h1><h2 id="u524D_u8A00"><a href="#u524D_u8A00" class="headerlink" title="前言"></a>前言</h2><p>在移动开发中二维码扫描这种事情越来越常见了，在iOS中我选择了用ZBar这个第三方来实现。<br><br>原因有三：好用，好用，好用。<br><br>好了来点正经的干货吧。首先献上下载地址：<a href="https://github.com/bmorton/ZBarSDK" target="_blank" rel="external">快来点我</a><br><br>然后你就可以把整个 ZBar文件夹拉到你的项目的Lib之类的目录下面了。<br></p>
 <p>如果用pod，就直接 <strong>pod ‘ZBarSDK’, ‘~&gt; 1.3.1’</strong> ， 那么你就可以越过下面那个添加库类的步骤了。<br> </p>
 <p>ZBar的使用给我们俩种选择，一种是自定义一个二维码视图，另一种是用他们自带的二维码视图（奇丑无比）。</p>
-<p>##添加库类<br>如下添加这些库类。<br></p>
+<h2 id="u6DFB_u52A0_u5E93_u7C7B"><a href="#u6DFB_u52A0_u5E93_u7C7B" class="headerlink" title="添加库类"></a>添加库类</h2><p>如下添加这些库类。<br></p>
 <p><img src="/images/iOS二维码扫描/1.png" alt="ZBar库类"></p>
-<p>##自定义二维码视图<br>一般都是给一个按钮绑定一个点击事件，然后当按钮点击的时候 就会调用二维码扫描，然后扫描成功就返回。<br><br>就像下面这个demo截图一样。<br></p>
+<h2 id="u81EA_u5B9A_u4E49_u4E8C_u7EF4_u7801_u89C6_u56FE"><a href="#u81EA_u5B9A_u4E49_u4E8C_u7EF4_u7801_u89C6_u56FE" class="headerlink" title="自定义二维码视图"></a>自定义二维码视图</h2><p>一般都是给一个按钮绑定一个点击事件，然后当按钮点击的时候 就会调用二维码扫描，然后扫描成功就返回。<br><br>就像下面这个demo截图一样。<br></p>
 <p><img src="/images/iOS二维码扫描/2.png" alt="Demo截图.png"><br></p>
 <p>然后就是正题了，我们首先要<figure class="highlight"><figcaption><span>"ZBarSDK.h"```.然后自定义的话 就要遵循这个代理```<zbarreaderviewdelegate>```<br></zbarreaderviewdelegate></span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#60;!-- more --&#62;&#10;&#28982;&#21518;&#23601;&#21487;&#20197;&#22312;&#28857;&#20987;&#30340;&#22238;&#35843;&#20989;&#25968;&#20013;&#35774;&#32622;&#22914;&#19979;&#65306;</span><br></pre></td></tr></table></figure></p>
 <pre><code>// Do any additional setup after loading the view.
@@ -45,7 +44,7 @@ NSString *data = symbol.data;
 //数据处理 
 //.......
 </code></pre><p>}</p>
-<figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">##自带的二维码视图</span><br><span class="line">和上面不同的是，这次我们要遵从的delegate变了是<span class="escape">``</span><span class="escape">`&lt;</span>ZBarReaderDelegate&gt;<span class="escape">``</span><span class="escape">`.</span>&lt;br&gt;</span><br><span class="line"></span><br><span class="line">然后再cilck方法里实现以下代码：</span><br></pre></td></tr></table></figure>
+<figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">## 自带的二维码视图</span><br><span class="line">和上面不同的是，这次我们要遵从的delegate变了是<span class="escape">``</span><span class="escape">`&lt;</span>ZBarReaderDelegate&gt;<span class="escape">``</span><span class="escape">`.</span>&lt;br&gt;</span><br><span class="line"></span><br><span class="line">然后再cilck方法里实现以下代码：</span><br></pre></td></tr></table></figure>
 <pre><code>//初始化相机控制器
 ZBarReaderViewController *reader = [ZBarReaderViewController new];
 //设置代理
@@ -74,7 +73,7 @@ for (symbol in symbols)
 //数据
 NSString *data = symbol.data;
 </code></pre><p>}</p>
-<figure class="highlight vala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="preprocessor">##我自定义的 二维码View</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight vala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="preprocessor">## 我自定义的 二维码View</span></span><br></pre></td></tr></table></figure>
 <ul>
 <li><p>(void)setOverlayPickerView:(ZBarReaderView *)reader<br>{</p>
 <p>  //清除原有控件</p>
@@ -190,22 +189,21 @@ cancelButton.alpha = 0.4;
 [reader addSubview:cancelButton];
  */
 </code></pre><p>}<br>```</p>
-<p>##总结<br>俩种方式都挺简单的，建议用自定义的，因为灵活 漂亮。</p>
-<p>##参考致谢<br><a href="http://www.yanyulin.info/pages/2015/01/25901846652567.html" target="_blank" rel="external">http://www.yanyulin.info/pages/2015/01/25901846652567.html</a></p>
+<h2 id="u603B_u7ED3"><a href="#u603B_u7ED3" class="headerlink" title="总结"></a>总结</h2><p>俩种方式都挺简单的，建议用自定义的，因为灵活 漂亮。</p>
+<h2 id="u53C2_u8003_u81F4_u8C22"><a href="#u53C2_u8003_u81F4_u8C22" class="headerlink" title="参考致谢"></a>参考致谢</h2><p><a href="http://www.yanyulin.info/pages/2015/01/25901846652567.html" target="_blank" rel="external">http://www.yanyulin.info/pages/2015/01/25901846652567.html</a></p>
 ]]></content>
     </entry>
     
     <entry>
       <title><![CDATA[入职同花顺有感]]></title>
       <url>http://yoursite.com/2016/03/05/%E5%85%A5%E8%81%8C%E5%90%8C%E8%8A%B1%E9%A1%BA%E6%9C%89%E6%84%9F/</url>
-      <content type="html"><![CDATA[<p>#入职同花顺有感</p>
-<p>##前言<br>这俩星期可以说是我最累的俩个星期，经历了很多这辈子都没有经历的事情。租房子，正式的iOS技术面，搬家，零零碎碎的东西卖，忍受一个人住的孤独，加班。累……<br><br><strong>slogan:</strong>但是人总要学着长大的，人总要学着一个人，总要学着累。<br></p>
-<p>##关于面试<br><br>同花顺面试对技术要求还是挺高的，问的问题都是比较有水平的。不像以前在小公司 CTO基本不了解iOS，一出来就是和你聊聊简历上的东西 聊聊人生理想的。<br><br>一面的时候，问的还是比较简单的，问一些循环引用，weak assign 区别，iOS 优化工具啊，项目经历，工作流程(这个应该是确定一下我是不是培训的)。还算顺利吧 一面，基本能聊上天。<br><br>二面的时候，问msg_send底层实现(这我没答上，看过忘了 需要加强)，如果你要写一个TableView你要怎么写(主要考察 Cell循环利用这块)。二面就被虐的比较惨了，特别是第一个问题 我们聊了好久，我也没有说出个所以然来(捂脸 尴尬)。看来自己要走的路还很长。<br><br>三面的时候，聊聊钱 聊聊人生理想 聊聊会不会跳槽等等，这个就聊的比较开心了，因为这种事情反正没什么难点的。<br><br>面试大体就这么结束了，2天后他们就叫我去上班了(实习岗，我还未毕业)。然后我就要开始租房子了。<br><br><a id="more"></a></p>
-<p>##关于入职and加班<br>同花顺和我以前的公司最大的不同就是加班文化很严重，基本下班了没人走。我一小实习生，老大都没动 我就提早滚犊子 这样不好吧。<br><br>基本上每天回到家 都9点+了。其实也还好 早上基本没什么要求，9点前到就好了。<br><br>可能我还没适应从6点下班到9点下班这个变化，所以我感觉到了累。其实习惯之后应该也还好<br></p>
-<p>##关于团队氛围<br>团队氛围，单从iOS技术氛围来说 还是比较好的，每周有分享会 这个还是挺有趣的。从大牛身上学点东西。<br><br>从人员和谐性来说，还是微海汇的团队比较和谐，在微海汇 每个月我们可以和CTO一起出去喝酒 聊天 熟悉彼此。虽然同花顺每星期都聚餐，都是大家都是管自己吃饭 所以没有什么感觉。不像以前可以大家喝喝酒 酒桌上大家自然变得很熟。<br></p>
-<p>##关于抉择<br>我不后悔我去同花顺这个抉择，从自己技术成长来说，这是一个正确的选择，可能现在感到累 感到孤独 感到团队压抑 感到工作压力。但是技术成长也会比较快，我不后悔 我只希望我干了几年之后 能再次加入像微海汇这样的舒服的团队，可以和自己的领导更像是朋友的领导一起工作。等到领导的肯定，比拿20K还让人高兴。</p>
-<p>##关于计划<br>接下来我要努力加班，努力成长 让自己的技术更屌，可以支撑起自己庞大的梦想。<br></p>
-<p>##最后<br>David 加油。最爱我的家人们 我想你们。</p>
+      <content type="html"><![CDATA[<h1 id="u5165_u804C_u540C_u82B1_u987A_u6709_u611F"><a href="#u5165_u804C_u540C_u82B1_u987A_u6709_u611F" class="headerlink" title="入职同花顺有感"></a>入职同花顺有感</h1><h2 id="u524D_u8A00"><a href="#u524D_u8A00" class="headerlink" title="前言"></a>前言</h2><p>这俩星期可以说是我最累的俩个星期，经历了很多这辈子都没有经历的事情。租房子，正式的iOS技术面，搬家，零零碎碎的东西卖，忍受一个人住的孤独，加班。累……<br><br><strong>slogan:</strong>但是人总要学着长大的，人总要学着一个人，总要学着累。<br></p>
+<h1 id="u5173_u4E8E_u9762_u8BD5"><a href="#u5173_u4E8E_u9762_u8BD5" class="headerlink" title="关于面试"></a>关于面试<br></h1><p>同花顺面试对技术要求还是挺高的，问的问题都是比较有水平的。不像以前在小公司 CTO基本不了解iOS，一出来就是和你聊聊简历上的东西 聊聊人生理想的。<br><br>一面的时候，问的还是比较简单的，问一些循环引用，weak assign 区别，iOS 优化工具啊，项目经历，工作流程(这个应该是确定一下我是不是培训的)。还算顺利吧 一面，基本能聊上天。<br><br>二面的时候，问msg_send底层实现(这我没答上，看过忘了 需要加强)，如果你要写一个TableView你要怎么写(主要考察 Cell循环利用这块)。二面就被虐的比较惨了，特别是第一个问题 我们聊了好久，我也没有说出个所以然来(捂脸 尴尬)。看来自己要走的路还很长。<br><br>三面的时候，聊聊钱 聊聊人生理想 聊聊会不会跳槽等等，这个就聊的比较开心了，因为这种事情反正没什么难点的。<br><br>面试大体就这么结束了，2天后他们就叫我去上班了(实习岗，我还未毕业)。然后我就要开始租房子了。<br><br><a id="more"></a></p>
+<h2 id="u5173_u4E8E_u5165_u804Cand_u52A0_u73ED"><a href="#u5173_u4E8E_u5165_u804Cand_u52A0_u73ED" class="headerlink" title="关于入职and加班"></a>关于入职and加班</h2><p>同花顺和我以前的公司最大的不同就是加班文化很严重，基本下班了没人走。我一小实习生，老大都没动 我就提早滚犊子 这样不好吧。<br><br>基本上每天回到家 都9点+了。其实也还好 早上基本没什么要求，9点前到就好了。<br><br>可能我还没适应从6点下班到9点下班这个变化，所以我感觉到了累。其实习惯之后应该也还好<br></p>
+<h2 id="u5173_u4E8E_u56E2_u961F_u6C1B_u56F4"><a href="#u5173_u4E8E_u56E2_u961F_u6C1B_u56F4" class="headerlink" title="关于团队氛围"></a>关于团队氛围</h2><p>团队氛围，单从iOS技术氛围来说 还是比较好的，每周有分享会 这个还是挺有趣的。从大牛身上学点东西。<br><br>从人员和谐性来说，还是微海汇的团队比较和谐，在微海汇 每个月我们可以和CTO一起出去喝酒 聊天 熟悉彼此。虽然同花顺每星期都聚餐，都是大家都是管自己吃饭 所以没有什么感觉。不像以前可以大家喝喝酒 酒桌上大家自然变得很熟。<br></p>
+<h2 id="u5173_u4E8E_u6289_u62E9"><a href="#u5173_u4E8E_u6289_u62E9" class="headerlink" title="关于抉择"></a>关于抉择</h2><p>我不后悔我去同花顺这个抉择，从自己技术成长来说，这是一个正确的选择，可能现在感到累 感到孤独 感到团队压抑 感到工作压力。但是技术成长也会比较快，我不后悔 我只希望我干了几年之后 能再次加入像微海汇这样的舒服的团队，可以和自己的领导更像是朋友的领导一起工作。等到领导的肯定，比拿20K还让人高兴。</p>
+<h2 id="u5173_u4E8E_u8BA1_u5212"><a href="#u5173_u4E8E_u8BA1_u5212" class="headerlink" title="关于计划"></a>关于计划</h2><p>接下来我要努力加班，努力成长 让自己的技术更屌，可以支撑起自己庞大的梦想。<br></p>
+<h2 id="u6700_u540E"><a href="#u6700_u540E" class="headerlink" title="最后"></a>最后</h2><p>David 加油。最爱我的家人们 我想你们。</p>
 ]]></content>
     </entry>
     
