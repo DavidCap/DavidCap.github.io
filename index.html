@@ -271,194 +271,20 @@
 
       
         
-          
-            <h1 id="iOS_u5F00_u53D1_u4E2D__u4E8C_u7EF4_u7801_u626B_u63CF"><a href="#iOS_u5F00_u53D1_u4E2D__u4E8C_u7EF4_u7801_u626B_u63CF" class="headerlink" title="iOS开发中 二维码扫描"></a>iOS开发中 二维码扫描</h1><h2 id="u524D_u8A00"><a href="#u524D_u8A00" class="headerlink" title="前言"></a>前言</h2><p>在移动开发中二维码扫描这种事情越来越常见了，在iOS中我选择了用ZBar这个第三方来实现。<br><br>原因有三：好用，好用，好用。<br><br>好了来点正经的干货吧。首先献上下载地址：<a href="https://github.com/bmorton/ZBarSDK" target="_blank" rel="external">快来点我</a><br><br>然后你就可以把整个 ZBar文件夹拉到你的项目的Lib之类的目录下面了。<br></p>
+          <h1 id="iOS_u5F00_u53D1_u4E2D__u4E8C_u7EF4_u7801_u626B_u63CF"><a href="#iOS_u5F00_u53D1_u4E2D__u4E8C_u7EF4_u7801_u626B_u63CF" class="headerlink" title="iOS开发中 二维码扫描"></a>iOS开发中 二维码扫描</h1><h2 id="u524D_u8A00"><a href="#u524D_u8A00" class="headerlink" title="前言"></a>前言</h2><p>在移动开发中二维码扫描这种事情越来越常见了，在iOS中我选择了用ZBar这个第三方来实现。<br><br>原因有三：好用，好用，好用。<br><br>好了来点正经的干货吧。首先献上下载地址：<a href="https://github.com/bmorton/ZBarSDK">快来点我</a><br><br>然后你就可以把整个 ZBar文件夹拉到你的项目的Lib之类的目录下面了。<br></p>
 <p>如果用pod，就直接 <strong>pod ‘ZBarSDK’, ‘~&gt; 1.3.1’</strong> ， 那么你就可以越过下面那个添加库类的步骤了。<br> </p>
 <p>ZBar的使用给我们俩种选择，一种是自定义一个二维码视图，另一种是用他们自带的二维码视图（奇丑无比）。</p>
 <h2 id="u6DFB_u52A0_u5E93_u7C7B"><a href="#u6DFB_u52A0_u5E93_u7C7B" class="headerlink" title="添加库类"></a>添加库类</h2><p>如下添加这些库类。<br></p>
 <p><img src="/images/iOS二维码扫描/1.png" alt="ZBar库类"></p>
 <h2 id="u81EA_u5B9A_u4E49_u4E8C_u7EF4_u7801_u89C6_u56FE"><a href="#u81EA_u5B9A_u4E49_u4E8C_u7EF4_u7801_u89C6_u56FE" class="headerlink" title="自定义二维码视图"></a>自定义二维码视图</h2><p>一般都是给一个按钮绑定一个点击事件，然后当按钮点击的时候 就会调用二维码扫描，然后扫描成功就返回。<br><br>就像下面这个demo截图一样。<br></p>
 <p><img src="/images/iOS二维码扫描/2.png" alt="Demo截图.png"><br></p>
-<p>然后就是正题了，我们首先要<figure class="highlight"><figcaption><span>"ZBarSDK.h"```.然后自定义的话 就要遵循这个代理```<zbarreaderviewdelegate>```<br></zbarreaderviewdelegate></span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#60;!-- more --&#62;&#10;&#28982;&#21518;&#23601;&#21487;&#20197;&#22312;&#28857;&#20987;&#30340;&#22238;&#35843;&#20989;&#25968;&#20013;&#35774;&#32622;&#22914;&#19979;&#65306;</span><br></pre></td></tr></table></figure></p>
-<pre><code>// Do any additional setup after loading the view.
-//初始化照相机窗口 这个readview 就是要美化的view
-ZBarReaderView *readview = [ZBarReaderView new];
-//自定义大小
-readview.frame = CGRectMake(100, 100, 300, 300);
-//自定义添加相关指示.........发挥各自的APP的想象力
-//此处省略美化10000行代码...................
-//………………………..
-// 好进入正题—— 接着设置好代理
-readview.readerDelegate = self;
-
-//将其照相机拍摄视图添加到要显示的视图上
-[self.view addSubview:readview];
-
-
-//二维码/条形码识别设置
-ZBarImageScanner *scanner = readview.scanner;
-
-[scanner setSymbology: ZBAR_I25
-               config: ZBAR_CFG_ENABLE
-                   to: 0];
-//启动，必须启动后，手机摄影头拍摄的即时图像菜可以显示在readview上
-[readview start];
-</code></pre><figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">还要实现如下<span class="keyword">delegate</span>方法，监听扫描成功回调：</span><br></pre></td></tr></table></figure>
-<p>-(void)readerView:(ZBarReaderView <em>)readerView didReadSymbols:(ZBarSymbolSet </em>)symbols fromImage:(UIImage <em>)image<br>{<br>    ZBarSymbol </em>symbol = nil;<br>    for (symbol in symbols)<br>    {<br>        break;<br>    }<br>    //扫描成功，让readerView消失<br>    [readerView removeFromSuperview];</p>
-<pre><code>//这个是二维码得到的数据
-NSString *data = symbol.data;
-//数据处理 
-//.......
-</code></pre><p>}</p>
-<figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">## 自带的二维码视图</span><br><span class="line">和上面不同的是，这次我们要遵从的delegate变了是<span class="escape">``</span><span class="escape">`&lt;</span>ZBarReaderDelegate&gt;<span class="escape">``</span><span class="escape">`.</span>&lt;br&gt;</span><br><span class="line"></span><br><span class="line">然后再cilck方法里实现以下代码：</span><br></pre></td></tr></table></figure>
-<pre><code>//初始化相机控制器
-ZBarReaderViewController *reader = [ZBarReaderViewController new];
-//设置代理
-reader.readerDelegate = self;
-//基本适配
-reader.supportedOrientationsMask = ZBarOrientationMaskAll;
-
-//二维码/条形码识别设置
-ZBarImageScanner *scanner = reader.scanner;
-
-[scanner setSymbology: ZBAR_I25
-               config: ZBAR_CFG_ENABLE
-                   to: 0];
-//弹出系统照相机，全屏拍摄
-[self presentModalViewController: reader animated: YES];
-</code></pre><figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">然后实现以下的<span class="keyword">delegate</span>.</span><br></pre></td></tr></table></figure>
-<p>-(void)imagePickerController:(UIImagePickerController <em>)picker didFinishPickingMediaWithInfo:(NSDictionary </em>)info<br>{<br>    id<nsfastenumeration> symbols = [info objectForKey:ZBarReaderControllerResults];</nsfastenumeration></p>
-<pre><code>ZBarSymbol *symbol = nil;
-for (symbol in symbols)
-{
-    break;
-}
-
-[picker dismissModalViewControllerAnimated:YES];
-
-//数据
-NSString *data = symbol.data;
-</code></pre><p>}</p>
-<figure class="highlight vala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="preprocessor">## 我自定义的 二维码View</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>(void)setOverlayPickerView:(ZBarReaderView *)reader<br>{</p>
-<p>  //清除原有控件</p>
-<p>  for (UIView *temp in [reader subviews]) {</p>
-<pre><code>for (UIButton *button in [temp subviews]) {
-
-    if ([button isKindOfClass:[UIButton class]]) {
-
-        [button removeFromSuperview];
-
-    }
-
-}
-
-for (UIToolbar *toolbar in [temp subviews]) {
-
-    if ([toolbar isKindOfClass:[UIToolbar class]]) {
-
-        [toolbar setHidden:YES];
-
-        [toolbar removeFromSuperview];
-
-    }
-
-}
-</code></pre><p>  }</p>
-<p>  /*<br>  //画中间的基准线 可有可无 个人爱好</p>
-<p>  UIView* line = [[UIView alloc] initWithFrame:CGRectMake(40, 220, 240, 1)];</p>
-<p>  line.backgroundColor = [UIColor redColor];</p>
-<p>  [reader addSubview:line];<br>  */</p>
-</li>
-</ul>
-<pre><code>//最上部view
-
-UIView* upView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 80)];
-
-upView.alpha = 0.3;
-
-upView.backgroundColor = [UIColor blackColor];
-
-[reader addSubview:upView];
-
-
-//左侧的view
-
-UIView *leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 80, 20, 280)];
-
-leftView.alpha = 0.3;
-
-leftView.backgroundColor = [UIColor blackColor];
-
-[reader addSubview:leftView];
-
-
-
-//右侧的view
-
-UIView *rightView = [[UIView alloc] initWithFrame:CGRectMake(300, 80, 20, 280)];
-
-rightView.alpha = 0.3;
-
-rightView.backgroundColor = [UIColor blackColor];
-
-[reader addSubview:rightView];
-
-
-
-//底部view
-
-UIView * downView = [[UIView alloc] initWithFrame:CGRectMake(0, 360, 320, 120)];
-
-downView.alpha = 0.3;
-
-downView.backgroundColor = [UIColor blackColor];
-
-[reader addSubview:downView];
-
-
-//用于说明的label
-
-UILabel * labIntroudction= [[UILabel alloc] init];
-
-labIntroudction.backgroundColor = [UIColor clearColor];
-
-labIntroudction.frame=CGRectMake((ScreenW - 280)*0.5,8, 280, 40);
-
-labIntroudction.numberOfLines=2;
-
-labIntroudction.textColor=[UIColor whiteColor];
-
-labIntroudction.font = Font(15);
-
-labIntroudction.text=@&quot;将二维码图像置于矩形方框内&quot;;
-labIntroudction.textAlignment = NSTextAlignmentCenter;
-
-[downView addSubview:labIntroudction];
-
-/*
-//用于取消操作的button 可有可无
-
-UIButton *cancelButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-
-cancelButton.alpha = 0.4;
-
-[cancelButton setFrame:CGRectMake(20, 390, 280, 40)];
-
-[cancelButton setTitle:@&quot;将二维码图像置于矩形方框内&quot; forState:UIControlStateNormal];
-
-[cancelButton.titleLabel setFont:[UIFont boldSystemFontOfSize:20]];
-
-[cancelButton addTarget:self action:@selector(dismissOverlayView:)forControlEvents:UIControlEventTouchUpInside];  
-
-[reader addSubview:cancelButton];
- */
-</code></pre><p>}<br>```</p>
-<h2 id="u603B_u7ED3"><a href="#u603B_u7ED3" class="headerlink" title="总结"></a>总结</h2><p>俩种方式都挺简单的，建议用自定义的，因为灵活 漂亮。</p>
-<h2 id="u53C2_u8003_u81F4_u8C22"><a href="#u53C2_u8003_u81F4_u8C22" class="headerlink" title="参考致谢"></a>参考致谢</h2><p><a href="http://www.yanyulin.info/pages/2015/01/25901846652567.html" target="_blank" rel="external">http://www.yanyulin.info/pages/2015/01/25901846652567.html</a></p>
-
-          
+<p>然后就是正题了，我们首先要<strong>#import “ZBarSDK.h”</strong>.然后自定义的话 就要遵循这个代理 <strong>ZBarReaderViewDelegate</strong></p>
+<p>然后就可以在点击的回调函数中设置如下：<br>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/03/28/iOS二维码扫描/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
