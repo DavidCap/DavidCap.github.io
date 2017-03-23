@@ -4,6 +4,45 @@
   
     
     <entry>
+      <title></title>
+      <url>http://yoursite.com/2017/02/20/2017%E5%B9%B4%E8%AE%A1%E5%88%92/</url>
+      <content type="html"><![CDATA[<p>title: 2017年计划<br>date: February 19, 2017 10:18 PM<br>tags: 生活<br>Categories: 生活<br>toc: true</p>
+<h1 id="2017_u5E74_u8BA1_u5212_u6742_u8C08"><a href="#2017_u5E74_u8BA1_u5212_u6742_u8C08" class="headerlink" title="2017年计划杂谈"></a>2017年计划杂谈</h1><h2 id="u5E74_u5EA6_u8BA1_u5212"><a href="#u5E74_u5EA6_u8BA1_u5212" class="headerlink" title="年度计划"></a>年度计划</h2><p>最近痴迷武侠，要练就一生本事 来年找THS报仇雪恨。<br>先列举一下2017年的年度计划吧。</p>
+<h3 id="u5543_u4E66_u8BA1_u5212"><a href="#u5543_u4E66_u8BA1_u5212" class="headerlink" title="啃书计划"></a>啃书计划</h3><p><strong>华山剑法，重在内功</strong></p>
+<ol>
+<li>代码大全 （代码规范）</li>
+<li>设计模式 （API设计）</li>
+<li>HTTP权威指南 （哈哈哈，不知道）</li>
+</ol>
+<p><strong>独孤九剑，招式牛逼</strong></p>
+<ol>
+<li>坚持看WWDC视频 with firend （热门Skill）</li>
+<li>Swift</li>
+</ol>
+<h3 id="u8BFB_u8F6E_u5B50_uFF0C_u9020_u8F6E_u5B50"><a href="#u8BFB_u8F6E_u5B50_uFF0C_u9020_u8F6E_u5B50" class="headerlink" title="读轮子，造轮子"></a>读轮子，造轮子</h3><p><strong>降龙十八掌，第一式 读轮有悔</strong></p>
+<ol>
+<li>AFNetworking （主要学习网络层架构）</li>
+<li>Aspects （主要学习Runtime和面试切面AOP）</li>
+</ol>
+<p><strong>降龙十八掌，第二式 造轮在天</strong></p>
+<ol>
+<li>造轮子计划A XCode插件一个，关于快速打包的吧。</li>
+<li>造轮子计划B Weex，具体没想好，想法是要用Weex写一个高仿XXX的。</li>
+<li>造轮子计划C Unity，写一个游戏，游戏 坦克大战？？？</li>
+</ol>
+<p>造轮子计划排序分先后，中间缺一个高逼格的开源项目。暂时先如此。</p>
+<h3 id="A_u9898_u7834_u4E07_u5377_uFF0C_u4EE3_u7801_u5982_u6709_u795E"><a href="#A_u9898_u7834_u4E07_u5377_uFF0C_u4EE3_u7801_u5982_u6709_u795E" class="headerlink" title="A题破万卷，代码如有神"></a>A题破万卷，代码如有神</h3><p>leetCode 每日一A，熟悉算法数据结构。并写博客总结，贴代码。</p>
+<h3 id="u8981_u996D_u6A21_u5F0F"><a href="#u8981_u996D_u6A21_u5F0F" class="headerlink" title="要饭模式"></a>要饭模式</h3><p>尝试性接外包项目，不强求。无聊是Web HTML（David and Novial），安卓（啃那笔 小杰），iOS（David and Novial），Java Or C# Or PHP（波）</p>
+<h3 id="u5173_u4E8E_u751F_u6D3B"><a href="#u5173_u4E8E_u751F_u6D3B" class="headerlink" title="关于生活"></a>关于生活</h3><ol>
+<li>早起一小时，跑步 30~40min 练字 10min 发呆 10min</li>
+<li>日常娱乐，新闻联播 焦点访谈</li>
+<li>健身 keep</li>
+<li>旅游 with bros to 华山论剑</li>
+</ol>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[iOS二维码扫描]]></title>
       <url>http://yoursite.com/2016/03/28/iOS%E4%BA%8C%E7%BB%B4%E7%A0%81%E6%89%AB%E6%8F%8F/</url>
       <content type="html"><![CDATA[<h1 id="iOS_u5F00_u53D1_u4E2D__u4E8C_u7EF4_u7801_u626B_u63CF"><a href="#iOS_u5F00_u53D1_u4E2D__u4E8C_u7EF4_u7801_u626B_u63CF" class="headerlink" title="iOS开发中 二维码扫描"></a>iOS开发中 二维码扫描</h1><h2 id="u524D_u8A00"><a href="#u524D_u8A00" class="headerlink" title="前言"></a>前言</h2><p>在移动开发中二维码扫描这种事情越来越常见了，在iOS中我选择了用ZBar这个第三方来实现。<br><br>原因有三：好用，好用，好用。<br><br>好了来点正经的干货吧。首先献上下载地址：<a href="https://github.com/bmorton/ZBarSDK" target="_blank" rel="external">快来点我</a><br><br>然后你就可以把整个 ZBar文件夹拉到你的项目的Lib之类的目录下面了。<br></p>
